@@ -21,28 +21,28 @@ const PostButton = styled.button.attrs({
 })``;
 
 const NewPost: React.FC = () => {
-  const [textInput, setTextInput] = useState<string | undefined>();
-  //   const [mutatePost, { isLoading, error, isSuccess }] = useMutation(sendPost);
+  const [textInput, setTextInput] = useState("");
+  const [mutatePost, { isLoading, error, isSuccess }] = useMutation(sendPost);
 
-  //   const handleClick = () => {
-  //     if (textInput !== "" && textInput) {
-  //       mutatePost({
-  //         body: textInput,
-  //         date: new Date().getTime(),
-  //         imageUrl: "",
-  //       });
-  //     }
-  //   };
+  const handleClick = async () => {
+    if (textInput !== "" && textInput) {
+      mutatePost({
+        body: textInput,
+        date: new Date().getTime(),
+        imageUrl: "",
+      });
+    }
+  };
 
-  //   useEffect(() => {
-  //     console.log(error);
-  //   }, [error]);
+  useEffect(() => {
+    console.log(error);
+  }, [error]);
 
-  //   useEffect(() => {
-  //     if (isSuccess) {
-  //       setTextInput(undefined);
-  //     }
-  //   }, [isSuccess]);
+  useEffect(() => {
+    if (isSuccess) {
+      setTextInput("");
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -52,11 +52,11 @@ const NewPost: React.FC = () => {
           onChange={(e) => setTextInput(e.target.value)}
           value={textInput}
         />
-        {/* <PostButton onClick={() => handleClick()}>Post</PostButton> */}
+        <PostButton onClick={handleClick}>Post</PostButton>
       </InputContainer>
-      {/* {isLoading && <Loading />}
+      {isLoading && <Loading />}
       {isSuccess && <p>Post saved!</p>}
-      {error && <p>Oh no, something went wrong!</p>} */}
+      {error && <p>Oh no, something went wrong!</p>}
     </>
   );
 };

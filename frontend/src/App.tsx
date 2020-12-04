@@ -50,7 +50,7 @@ function App() {
       </NewPostContainer>
       <TimelineContainer>
         {isLoading && <Loading />}
-        {!isLoading && data && data.map((postdata) => <Post data={postdata} />)}
+        {!isLoading && data && data.map((postdata, i) => <Post key={i} data={postdata} />)}
       </TimelineContainer>
     </AppGrid>
   );
