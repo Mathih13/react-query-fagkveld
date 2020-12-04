@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import styled from "styled-components";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { fetchPosts } from "./queries";
 import { Post as PostType } from "./types";
 import Post from "./components/Post";
 import Loading from "./components/Loading";
+import { sendPost } from "./mutations";
+import NewPost from "./components/NewPost";
 
 const AppGrid = styled.div.attrs({
   className: "bg-indigo-50",
@@ -24,6 +26,13 @@ const PageTitle = styled.div.attrs({
   grid-column: 4 / 8;
 `;
 
+const NewPostContainer = styled.div.attrs({
+  className: "p-6 overflow-y-scroll",
+})`
+  grid-column: 5 / 13;
+  grid-row: 2 / -1;
+`;
+
 const TimelineContainer = styled.div.attrs({
   className: "p-6 overflow-y-scroll",
 })`
@@ -33,9 +42,12 @@ const TimelineContainer = styled.div.attrs({
 
 function App() {
   const { isLoading, data } = useQuery<Array<PostType>>("posts", fetchPosts);
+
   return (
     <AppGrid>
-      <PageTitle>Timeline</PageTitle>
+      <NewPostContainer>
+        <NewPost />
+      </NewPostContainer>
       <TimelineContainer>
         {isLoading && <Loading />}
         {!isLoading && data && data.map((postdata) => <Post data={postdata} />)}
