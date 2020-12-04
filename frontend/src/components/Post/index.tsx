@@ -38,14 +38,21 @@ const UserPost: React.FC<PostProps> = ({ data }) => {
         <AuthorName>
           {data.user.firstName} {data.user.lastName}
           <PostTimestamp>
-            <FormattedRelativeTime
-              updateIntervalInSeconds={60000}
-              value={seconds}
-            />
+            {seconds < 60 ? (
+              <FormattedRelativeTime
+                updateIntervalInSeconds={1}
+                value={seconds}
+              />
+            ) : (
+              <FormattedRelativeTime
+                updateIntervalInSeconds={60}
+                value={seconds}
+              />
+            )}
           </PostTimestamp>
         </AuthorName>
         <PostBody>{data.body}</PostBody>
-        {data.imageUrl && <PostImage src={data.imageUrl} />}
+        <PostImage src={data.imageUrl} />
       </BodyContainer>
     </Container>
   );

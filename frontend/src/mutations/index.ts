@@ -4,7 +4,6 @@ import { Post } from "../types";
 type PostData = { date: number } & Pick<Post, "body" | "imageUrl">;
 
 const sendPost = async (data: PostData) => {
-  console.log(JSON.stringify(data));
   return await fetch(`${config.api.baseUrl}/post`, {
     method: "POST",
     body: JSON.stringify(data),

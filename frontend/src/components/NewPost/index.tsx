@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryCache } from "react-query";
 import styled from "styled-components";
 import { sendPost } from "../../mutations";
 import Loading from "../Loading";
@@ -21,28 +21,28 @@ const PostButton = styled.button.attrs({
 })``;
 
 const NewPost: React.FC = () => {
+  const queryCache = useQueryCache();
   const [textInput, setTextInput] = useState("");
   const [mutatePost, { isLoading, error, isSuccess }] = useMutation(sendPost);
 
   const handleClick = async () => {
-    if (textInput !== "" && textInput) {
-      mutatePost({
+    if (textInput !== "") {
+      const response = await mutatePost({
         body: textInput,
         date: new Date().getTime(),
         imageUrl: "",
       });
+
+      if (response && response.ok) {
+        setTextInput("");
+        queryCache.invalidateQueries("posts");
+      }
     }
   };
 
   useEffect(() => {
     console.log(error);
   }, [error]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      setTextInput("");
-    }
-  }, [isSuccess]);
 
   return (
     <>
