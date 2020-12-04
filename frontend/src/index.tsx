@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ReactQueryCacheProvider } from "react-query";
+import { IntlProvider } from "react-intl";
 
 ReactDOM.render(
   <React.StrictMode>
     <ReactQueryCacheProvider>
-      <App />
+      <IntlProvider locale="en">
+        <App />
+      </IntlProvider>
     </ReactQueryCacheProvider>
   </React.StrictMode>,
   document.getElementById("root")

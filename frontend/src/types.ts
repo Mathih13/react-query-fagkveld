@@ -1,11 +1,12 @@
 export type Post = {
-    body: string;
-    imageUrl: string;
-    user: User; 
-    date: string;
-}
+  body: string;
+  imageUrl: string;
+  user: User;
+  date: string;
+};
 
 export type User = {
-    firstName: string;
-    lastName: string;
-}
+  firstName: string;
+  lastName: string;
+  profileImageUrl: string;
+};

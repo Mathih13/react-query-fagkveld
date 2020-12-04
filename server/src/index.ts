@@ -9,11 +9,13 @@ const app = express();
 app.use(cors());
 
 app.get("/posts", async (req: Request, res: Response) => {
+  console.log("Request for Posts");
   let result: Array<Post> = [];
-  const postsRef = db.collection("posts").limit(25);
+  const postsRef = db.collection("posts").limit(25).orderBy("date", "desc");
   const snapshot = await postsRef.get();
   snapshot.forEach((doc) => {
     let obj = doc.data();
+    obj.date = obj.date.toDate();
     result.push(obj as Post);
   });
   res.json(result);

@@ -3,8 +3,9 @@ import "./App.css";
 import styled from "styled-components";
 import { useQuery } from "react-query";
 import { fetchPosts } from "./queries";
-import { Post } from "./types";
-
+import { Post as PostType } from "./types";
+import Post from "./components/Post";
+import Loading from "./components/Loading";
 
 const AppGrid = styled.div.attrs({
   className: "bg-indigo-50",
@@ -24,26 +25,21 @@ const PageTitle = styled.div.attrs({
 `;
 
 const TimelineContainer = styled.div.attrs({
-  className: "p-6 bg-white shadow-md rounded-md overflow-y-scroll",
+  className: "p-6 overflow-y-scroll",
 })`
-  grid-column: 6 / 12;
-  grid-row: 5 / 15;
+  grid-column: 1 / -1;
+  grid-row: 5 / -1;
 `;
 
-
 function App() {
-  // const { isLoading, data } = useQuery<Array<Post>>("posts", fetchPosts);
-
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log("We have data!", data);
-  //   }
-  // }, [data])
-
+  const { isLoading, data } = useQuery<Array<PostType>>("posts", fetchPosts);
   return (
     <AppGrid>
       <PageTitle>Timeline</PageTitle>
-      <TimelineContainer></TimelineContainer>
+      <TimelineContainer>
+        {isLoading && <Loading />}
+        {!isLoading && data && data.map((postdata) => <Post data={postdata} />)}
+      </TimelineContainer>
     </AppGrid>
   );
 }
