@@ -3,6 +3,7 @@ import { useMutation, useQueryCache } from "react-query";
 import styled from "styled-components";
 import { sendPost } from "../../mutations";
 import Loading from "../Loading";
+import TimedDisplay from "../TimedDisplay";
 
 const NewPostTitle = styled.h2.attrs({
   className: "text-2xl font-medium text-blue-500",
@@ -55,7 +56,7 @@ const NewPost: React.FC = () => {
         <PostButton onClick={handleClick}>Post</PostButton>
       </InputContainer>
       {isLoading && <Loading />}
-      {isSuccess && <p>Post saved!</p>}
+      {isSuccess && <TimedDisplay duration={1500}>Post saved!</TimedDisplay>}
       {error && <p>Oh no, something went wrong!</p>}
     </>
   );

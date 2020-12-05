@@ -4,11 +4,11 @@ import styled from "styled-components";
 import { Post } from "../../types";
 
 const Container = styled.div.attrs({
-  className: "p-6 mb-4 w-6/12 mx-auto bg-white shadow-md rounded-md flex",
+  className: "p-6 mb-4 w-4/12 mx-auto bg-white shadow-md rounded-md flex",
 })``;
 
 const UserProfileImage = styled.img.attrs({
-  className: "h-20 rounded-full",
+  className: "h-16 rounded-full",
 })``;
 
 const BodyContainer = styled.div.attrs({ className: "mx-4 w-full" })``;

@@ -27,17 +27,17 @@ const PageTitle = styled.div.attrs({
 `;
 
 const NewPostContainer = styled.div.attrs({
-  className: "p-6 overflow-y-scroll",
+  className: "p-6 bg-blue-100 shadow-md",
 })`
   grid-column: 5 / 13;
-  grid-row: 2 / -1;
+  grid-row: 2 / 4;
 `;
 
 const TimelineContainer = styled.div.attrs({
-  className: "p-6 overflow-y-scroll",
+  className: "p-6 overflow-y-scroll ",
 })`
   grid-column: 1 / -1;
-  grid-row: 5 / -1;
+  grid-row: 4 / -1;
 `;
 
 function App() {
@@ -50,7 +50,9 @@ function App() {
       </NewPostContainer>
       <TimelineContainer>
         {isLoading && <Loading />}
-        {!isLoading && data && data.map((postdata, i) => <Post key={i} data={postdata} />)}
+        {!isLoading &&
+          data &&
+          data.map((postdata, i) => <Post key={i} data={postdata} />)}
       </TimelineContainer>
     </AppGrid>
   );
